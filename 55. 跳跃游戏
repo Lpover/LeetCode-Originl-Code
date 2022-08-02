@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        bool ans=false;
+        int minn=0;
+        if(nums.size()==1)ans=true;
+        for(int i=0;i<nums.size()-1;i++){
+            if(i<=minn){
+                minn=max(i+nums[i],minn);
+                if(minn>=nums.size()-1){
+                    ans=true;
+                    break;
+                }
+            }
+        }        
+        return ans;
+    }
+};
