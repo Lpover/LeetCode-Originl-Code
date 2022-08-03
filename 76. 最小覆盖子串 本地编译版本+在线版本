@@ -1,0 +1,69 @@
+本地Dev版本
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+		string s="ADOBECODEBANC";
+		string t="ABC";
+		string ans="";
+		map<char,int>hs,ht;
+        for(int i=0;i<t.size();i++)ht[t[i]]++;
+        
+        int l=0,r=0,minlen=1e8,pos=0;
+		int cnt=0;
+		
+        while(r<s.size()){
+                
+                hs[s[r]]++;
+                if(hs[s[r]]<=ht[s[r]])cnt++;
+                r++;
+            while(l<s.size()&&cnt==t.size()){
+                hs[s[l]]--;
+                if(hs[s[l]]<ht[s[l]]){
+                	cnt--;
+                	if(r-l<minlen){
+                		minlen=r-l;
+                		pos=l;
+                		ans=s.substr(pos,minlen);
+					}
+				}
+	            l++;
+            }
+            if(r==s.size()&&cnt<t.size())break;
+        }
+        cout<<ans;
+} 
+力扣在线版本
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        string ans="";
+		map<char,int>hs,ht;
+ 
+        for(int i=0;i<t.size();i++)ht[t[i]]++;
+ 
+        int l=0,r=0,minlen=1e8,pos=0;
+		int cnt=0;
+        while(r<s.size()){
+                
+                hs[s[r]]++;
+                if(hs[s[r]]<=ht[s[r]])cnt++;
+                r++;
+            while(l<s.size()&&cnt==t.size()){
+                hs[s[l]]--;
+                if(hs[s[l]]<ht[s[l]]){
+                	cnt--;
+                	if(r-l<minlen){
+                		minlen=r-l;
+                		pos=l;
+                		ans=s.substr(pos,minlen);
+					}
+				}
+	            l++;
+            }
+            if(r==s.size()&&cnt<t.size())break;
+        }
+        return ans;
+    }
+};
