@@ -1,0 +1,89 @@
+本地DEV调试（有很多种剪枝）
+
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<string> >ans;
+bool check(int x,int y,vector<string> chessmap,int n){
+//    for(int i=0;i<y;i++)if(chessmap[x][i]=='Q'){
+//        return false;
+//    }
+    for(int i=0;i<x;i++)if(chessmap[i][y]=='Q'){
+        return false;
+    }
+    for(int i=1,j=1;x-i>=0&&y-j>=0;i++,j++){
+        if(chessmap[x-i][y-j]=='Q'){
+            return false;
+        }
+    }
+    for(int i=1,j=1;x-i>=0&&y+j<n;i++,j++){
+        if(chessmap[x-i][y+j]=='Q'){
+            return false;
+        }
+    }
+    return true;
+}
+void dfs(int x,vector<string> chessmap,int n){
+    if(x>=n){
+        ans.push_back(chessmap);
+        return;
+    }
+    for(int y=0;y<n;y++){
+        if(check(x,y,chessmap,n)==true){
+            chessmap[x][y]='Q';
+            dfs(x+1,chessmap,n);
+            chessmap[x][y]='.';
+        }
+    }
+}
+int main(){
+	int n=4;
+	vector<string> chessmap(n,string(n,'.'));
+	dfs(0,chessmap,n);
+	for(auto i=0;i<ans.size();i++){
+		for(auto j=0;j<ans[i].size();j++)cout<<ans[i][j];
+		cout<<endl;
+	}
+}
+在线版本
+
+class Solution {
+public:
+    vector<vector<string> >ans;
+    void dfs(int x,vector<string> chessmap,int n){
+        if(x>=n){
+            ans.push_back(chessmap);
+            return;
+        }
+        for(int y=0;y<n;y++){
+            if(check(x,y,chessmap,n)==true){
+                chessmap[x][y]='Q';
+                dfs(x+1,chessmap,n);
+                chessmap[x][y]='.';
+            }
+        }
+    }
+    bool check(int x,int y,vector<string> chessmap,int n){
+        // for(int i=0;i<y;i++)if(chessmap[x][i]=='Q'){
+        //     return false;
+        // }
+        for(int i=0;i<x;i++)if(chessmap[i][y]=='Q'){
+            return false;
+        }
+        for(int i=1,j=1;x-i>=0&&y-j>=0;i++,j++){
+            if(chessmap[x-i][y-j]=='Q'){
+                return false;
+            }
+        }
+        for(int i=1,j=1;x-i>=0&&y+j<n;i++,j++){
+            if(chessmap[x-i][y+j]=='Q'){
+                return false;
+            }
+        }
+        return true;
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> chessmap(n,string(n,'.'));
+        dfs(0,chessmap,n);
+        return ans;
+    }
+};
