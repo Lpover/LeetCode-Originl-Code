@@ -1,0 +1,42 @@
+本地代码
+
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<int>> ans;
+bool used[20]={0};
+void dfs(int x,vector<int> love,vector<int> nums){
+	if(x==nums.size())return;
+    dfs(x+1,love,nums);
+    love.push_back(nums[x]);
+    ans.push_back(love);
+    dfs(x+1,love,nums);
+}
+int main(){
+    vector<int> nums={1,2,3};
+    vector<int> love;
+    dfs(0,love,nums);
+    for(int i=0;i<ans.size();i++)
+    	for(int j=0;j<ans[i].size();j++){
+    		cout<<ans[i][j];
+		}
+} 
+在线代码
+
+class Solution {
+public:
+    vector<vector<int>> ans;
+    bool used[20]={0};
+    void dfs(int x,vector<int> love,vector<int> nums){
+       if(x==nums.size())return;
+       dfs(x+1,love,nums);
+       love.push_back(nums[x]);
+       ans.push_back(love);
+       dfs(x+1,love,nums);
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        ans.push_back({});
+        vector<int> love;
+        dfs(0,love,nums);
+        return ans;
+    }
+};
