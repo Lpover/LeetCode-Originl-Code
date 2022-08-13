@@ -1,0 +1,64 @@
+class MyStack {
+public:
+    // MyStack() {
+    // }
+    
+    deque<int> front1;
+    deque<int> front2;
+
+    void push(int x) {
+        if(front1.empty()){
+            front1.push_back(x);
+            while(!front2.empty()){
+                front1.push_back(front2.front());
+                front2.pop_front();
+            }
+        }
+        else if(front2.empty()){
+            front2.push_back(x);
+            while(!front1.empty()){
+                front2.push_back(front1.front());
+                front1.pop_front();
+            }
+        }
+        return;
+    }
+    
+    int pop() {
+        int popans;
+        if(!front1.empty()){
+            popans=front1.front();
+            front1.pop_front();
+        }
+        else if(!front2.empty()){
+            popans=front2.front();
+            front2.pop_front();
+        }
+        return popans;
+    }
+    
+    int top() {
+        int topans;
+        if(!front1.empty()){
+            topans=front1.front();
+        }
+        else if(!front2.empty()){
+            topans=front2.front();
+        }
+        return topans;
+    }
+    
+    bool empty() {
+        if(front1.empty()&&front2.empty())return true;
+        return false;
+    }
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack* obj = new MyStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->top();
+ * bool param_4 = obj->empty();
+ */
