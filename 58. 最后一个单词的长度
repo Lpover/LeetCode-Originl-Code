@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int ans=1,i;
+        int charpos=s.size();
+        for(i=s.size()-1;i>=0;i--){
+            if(s[i]!=' '&&charpos==s.size())charpos=i;;
+            if(s[i]==' '&&charpos!=s.size()){
+                break;
+            }
+        }
+        ans=charpos-i;
+        return ans;
+    }
+};
