@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string ans="";
+        string add1="1";
+        string add0="0";
+        int na=a.size()-1,nb=b.size()-1;
+        int jh=0;
+        while(na>nb){
+            b=add0+b;
+            nb++;
+        }
+        while(nb>na){
+            a=add0+a;
+            na++;
+        }
+        for(int i=na;i>=0;i--){
+            int num=(a[i]-'0'+b[i]-'0')+jh;
+            a[i]=num%2+'0';
+            jh=num/2;
+        }
+        if(jh>0){
+            a=add1+a;
+        }
+        return a;
+    }
+};
