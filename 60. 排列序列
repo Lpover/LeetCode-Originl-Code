@@ -11,14 +11,14 @@ public:
         string ans="";
         k--;
         for(int i=1;i<n;i++){
-            int num=k/f[n-i]+1;
+            int num=k/f[n-i];
             k=k%f[n-i];
             int jl=0;
             for(int j=1;j<=n;j++){
                 if(!used[j]){
                     jl++;
                 }
-                if(jl>=num&&used[j]==false){
+                if(jl>num&&used[j]==false){
                     used[j]=true;
                     ans+=j+'0';
                     break;
