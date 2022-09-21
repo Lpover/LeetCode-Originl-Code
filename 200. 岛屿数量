@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int ans=0;
+    bool used[305][305]={0};
+    void dfs(vector<vector<char>>& grid,int x,int y,int nx,int ny){
+        if(used[x][y])return;
+        used[x][y]=true;
+        if(y-1>=0&&grid[x][y-1]=='1')dfs(grid,x,y-1,nx,ny);
+        if(x-1>=0&&grid[x-1][y]=='1')dfs(grid,x-1,y,nx,ny);
+        if(y+1<ny&&grid[x][y+1]=='1')dfs(grid,x,y+1,nx,ny);
+        if(x+1<nx&&grid[x+1][y]=='1')dfs(grid,x+1,y,nx,ny);
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int nx=grid.size();
+        int ny=grid[0].size();
+        for(int i=0;i<nx;i++)
+            for(int j=0;j<ny;j++){
+                if(!used[i][j]&&grid[i][j]=='1'){
+                    ans++;
+                    dfs(grid,i,j,nx,ny);
+                }
+            }
+        return ans;
+    }
+};
